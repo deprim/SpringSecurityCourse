@@ -1,6 +1,7 @@
 package com.example.springcourse.SpringSecurityCourse.services;
 
 import com.example.springcourse.SpringSecurityCourse.model.Users;
+import com.example.springcourse.SpringSecurityCourse.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,16 +12,16 @@ import com.example.springcourse.SpringSecurityCourse.principal.UserPrincipal;
 @Service
 public class MyUserDetailService implements UserDetailsService {
 
-    private final UserService userService;
+    private final UsersRepository usersRepository;
 
     @Autowired
-    public MyUserDetailService(UserService userService) {
-        this.userService = userService;
+    public MyUserDetailService(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userService.findUserByUsername(username);
+        Users user = usersRepository.findByUsername(username);
         if (user == null) throw new UsernameNotFoundException("User not found");
         return new UserPrincipal(user);
     }

@@ -3,13 +3,11 @@ package com.example.springcourse.SpringSecurityCourse.controller;
 import com.example.springcourse.SpringSecurityCourse.model.Users;
 import com.example.springcourse.SpringSecurityCourse.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/users")
+
 @RestController
 public class UsersContoller {
 
@@ -21,11 +19,16 @@ public class UsersContoller {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/users")
     public List<Users> showAllUsers(){
 
         return userService.showAllUsers();
 
+    }
+
+    @PostMapping("/register")
+    public Users createUser(@RequestBody Users user){
+        return userService.registerUser(user);
     }
 
 
