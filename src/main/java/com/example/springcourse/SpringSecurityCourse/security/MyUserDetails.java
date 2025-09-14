@@ -1,18 +1,17 @@
-package com.example.springcourse.SpringSecurityCourse.principal;
+package com.example.springcourse.SpringSecurityCourse.security;
 
-import com.example.springcourse.SpringSecurityCourse.model.Users;
+import com.example.springcourse.SpringSecurityCourse.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-public class UserPrincipal implements UserDetails {
-    private final Users user;
+public class MyUserDetails implements UserDetails {
+    private final User user;
 
-    public UserPrincipal(Users user) {
+    public MyUserDetails(User user) {
         this.user = user;
     }
 
@@ -38,4 +37,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isEnabled() { return true; }
+
+    public User getUser() { return user; }
+
 }
