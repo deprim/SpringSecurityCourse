@@ -4,6 +4,7 @@ package com.example.springcourse.SpringSecurityCourse.services;
 import com.example.springcourse.SpringSecurityCourse.model.User;
 import com.example.springcourse.SpringSecurityCourse.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,11 @@ public class UserService {
 //    public List<User> showAllUsers() {
 //        return usersRepository.findAll();
 //    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void test(){
+        System.out.println("Hello epta");
+    }
 
 
     public void registerUser(User user) {

@@ -30,6 +30,7 @@ public class UsersController {
 
     @GetMapping("/hello")
     public String hello() {
+        userService.test();
         return "/hello";
     }
 

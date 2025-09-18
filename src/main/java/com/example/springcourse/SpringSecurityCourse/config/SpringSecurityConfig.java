@@ -1,10 +1,12 @@
 package com.example.springcourse.SpringSecurityCourse.config;
 
+import com.example.springcourse.SpringSecurityCourse.services.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,13 +17,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SpringSecurityConfig {
 
-    private final UserDetailsService userDetailsService;
+    private final MyUserDetailService myUserDetailService;
 
     @Autowired
-    public SpringSecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public SpringSecurityConfig(MyUserDetailService myUserDetailService) {
+        this.myUserDetailService = myUserDetailService;
     }
 
     @Bean
@@ -51,10 +54,10 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authProvider(UserDetailsService userDetailsService,
+    public DaoAuthenticationProvider authProvider(MyUserDetailService myUserDetailService,
                                                   PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(myUserDetailService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
