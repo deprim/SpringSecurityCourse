@@ -30,8 +30,8 @@ public class UserService {
 
 
     public void registerUser(User user) {
-        System.out.println(">>> Register user: " + user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
         usersRepository.save(user);
     }
 

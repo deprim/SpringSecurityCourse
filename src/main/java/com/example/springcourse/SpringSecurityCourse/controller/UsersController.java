@@ -63,6 +63,11 @@ public class UsersController {
 
     }
 
+    @GetMapping("/admin")
+    public String adminPage(){
+        return "/admin";
+    }
+
 
 //    @GetMapping("/showUserInfo")
 //    public String showUserInfo(){
